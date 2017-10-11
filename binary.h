@@ -1,4 +1,8 @@
 /*----------------------------------------------------------------------------*\
+| PART OF THE COSPLAY.LIGHTING SOURCE CODE LIBRARY COLLECTION.                 |
+| SOURCE:  https://github.com/cosplaylighting/binary                           |
+| LICENSE: https://github.com/cosplaylighting/binary/blob/master/LICENSE       |
++------------------------------------------------------------------------------+
 | SIMPLE STRUCTS/UNIONS FOR SWAPPING BETWEEN BIG AND LITTLE ENDIAN.            |
 | ALL SWAPPING IS DONE IN-PLACE, SO NO ADDITIONAL RAM IS NEEDED.               |
 | SWAPPING IS DONE VIA 3 INLINED XOR COMMANDS, KEEPING THE CODE FOOTPRINT VERY |
