@@ -22,16 +22,7 @@
 
 
 
-#ifndef INLINE
-#define INLINE		inline __attribute__ ((always_inline))
-#endif
-
-
-
-
-#ifndef PACKED
-#define PACKED		__attribute__ ((packed))
-#endif
+#include "inline.h"
 
 
 
@@ -93,7 +84,18 @@ union PACKED uint8_b {
 	}
 
 
-	static INLINE uint8_t fill() { return 0xff; }
+	INLINE uint8_t shift(uint8_t offset) {
+		return (this->byte_0 >> ((uint8_t)offset)) & 0x01;
+	}
+
+
+	INLINE void shift(uint8_t offset, bool value) {
+		value	? this->byte_0 |=  ((uint8_t)value)<<((uint8_t)offset)
+				: this->byte_0 &= ~((uint8_t)1)<<((uint8_t)offset);
+	}
+
+
+	static INLINE uint8_b fill() { return 0xff; }
 };
 
 
@@ -118,7 +120,7 @@ union PACKED uint16_b {
 	}
 
 
-	uint8_b		byte[2];
+	uint8_t		byte[2];
 	uint16_t	word[1];
 	uint16_t	word_0;
 
@@ -176,6 +178,17 @@ union PACKED uint16_b {
 	}
 
 
+	INLINE uint8_t shift(uint8_t offset) {
+		return (this->word_0 >> ((uint16_t)offset)) & 0x01;
+	}
+
+
+	INLINE void shift(uint8_t offset, bool value) {
+		value	? this->word_0 |=  ((uint16_t)value)<<((uint16_t)offset)
+				: this->word_0 &= ~((uint16_t)1)<<((uint16_t)offset);
+	}
+
+
 	INLINE void swap() {
 		byte_0 ^= byte_1;
 		byte_1 ^= byte_0;
@@ -183,7 +196,7 @@ union PACKED uint16_b {
 	}
 
 
-	static INLINE uint16_t fill() { return 0xffff; }
+	static INLINE uint16_b fill() { return 0xffff; }
 };
 
 
@@ -223,8 +236,8 @@ union PACKED uint32_b {
 	}
 
 
-	uint8_b		byte[4];
-	uint16_b	word[2];
+	uint8_t		byte[4];
+	uint16_t	word[2];
 	uint32_t	dword[1];
 	uint32_t	dword_0;
 
@@ -311,14 +324,25 @@ union PACKED uint32_b {
 
 
 	INLINE void in(uint8_t bit) {
-		this->dword_0 = (this->dword_0 << 1) | !!bit;
+		this->dword_0 = (this->dword_0 << 1L) | !!bit;
 	}
 
 
 	INLINE uint8_t out() {
 		uint8_t out		= this->dword_0 & 0x01;
-		this->dword_0	= this->dword_0 >> 1;
+		this->dword_0	= this->dword_0 >> 1L;
 		return out;
+	}
+
+
+	INLINE uint8_t shift(uint8_t offset) {
+		return (this->dword_0 >> ((uint32_t)offset)) & 0x01;
+	}
+
+
+	INLINE void shift(uint8_t offset, bool value) {
+		value	? this->dword_0 |=  ((uint32_t)value)<<((uint32_t)offset)
+				: this->dword_0 &= ~((uint32_t)1)<<((uint32_t)offset);
 	}
 
 
@@ -333,7 +357,7 @@ union PACKED uint32_b {
 	}
 
 
-	static INLINE uint32_t fill() { return 0xffffffff; }
+	static INLINE uint32_b fill() { return 0xffffffffL; }
 };
 
 
