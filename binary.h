@@ -90,8 +90,8 @@ union PACKED uint8_b {
 
 
 	INLINE void shift(uint8_t offset, bool value) {
-		value	? this->byte_0 |=  ((uint8_t)value)<<((uint8_t)offset)
-				: this->byte_0 &= ~((uint8_t)1)<<((uint8_t)offset);
+		value	? (this->byte_0 |=  ((uint8_t)1)<<((uint8_t)offset))
+				: (this->byte_0 &= ~((uint8_t)1)<<((uint8_t)offset));
 	}
 
 
@@ -184,8 +184,8 @@ union PACKED uint16_b {
 
 
 	INLINE void shift(uint8_t offset, bool value) {
-		value	? this->word_0 |=  ((uint16_t)value)<<((uint16_t)offset)
-				: this->word_0 &= ~((uint16_t)1)<<((uint16_t)offset);
+		value	? (this->word_0 |=  ((uint16_t)1)<<((uint16_t)offset))
+				: (this->word_0 &= ~((uint16_t)1)<<((uint16_t)offset));
 	}
 
 
@@ -206,6 +206,12 @@ union PACKED uint16_b {
 // BITFIELD - 32-BIT
 ////////////////////////////////////////////////////////////////////////////////
 union PACKED uint32_b {
+	uint8_t		byte[4];
+	uint16_t	word[2];
+	uint32_t	dword[1];
+	uint32_t	dword_0;
+
+
 	INLINE uint32_b()					{ this->dword_0 = 0; }
 	INLINE uint32_b(uint32_t dword)		{ this->dword_0 = dword; }
 	INLINE uint32_b(uint32_t *dword)	{ this->dword_0 = dword[0]; }
@@ -234,12 +240,6 @@ union PACKED uint32_b {
 		this->byte_2 = byte_2;
 		this->byte_3 = byte_3;
 	}
-
-
-	uint8_t		byte[4];
-	uint16_t	word[2];
-	uint32_t	dword[1];
-	uint32_t	dword_0;
 
 
 	struct PACKED {
@@ -341,8 +341,8 @@ union PACKED uint32_b {
 
 
 	INLINE void shift(uint8_t offset, bool value) {
-		value	? this->dword_0 |=  ((uint32_t)value)<<((uint32_t)offset)
-				: this->dword_0 &= ~((uint32_t)1)<<((uint32_t)offset);
+		value	? (this->dword_0 |=  ((uint32_t)1)<<((uint32_t)offset))
+				: (this->dword_0 &= ~((uint32_t)1)<<((uint32_t)offset));
 	}
 
 
