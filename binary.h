@@ -90,8 +90,9 @@ union PACKED uint8_b {
 
 
 	INLINE void shift(uint8_t offset, bool value) {
-		value	? (this->byte_0 |=  ((uint8_t)1)<<((uint8_t)offset))
-				: (this->byte_0 &= ~((uint8_t)1)<<((uint8_t)offset));
+		uint8_t tmp = ((uint8_t)1)<<((uint8_t)offset);
+		value	? (this->byte_0 |=  tmp)
+				: (this->byte_0 &= ~tmp);
 	}
 
 
@@ -184,8 +185,9 @@ union PACKED uint16_b {
 
 
 	INLINE void shift(uint8_t offset, bool value) {
-		value	? (this->word_0 |=  ((uint16_t)1)<<((uint16_t)offset))
-				: (this->word_0 &= ~((uint16_t)1)<<((uint16_t)offset));
+		uint16_t tmp = ((uint16_t)1)<<((uint16_t)offset);
+		value	? (this->word_0 |=  tmp)
+				: (this->word_0 &= ~tmp);
 	}
 
 
