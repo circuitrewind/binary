@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------*\
-| PART OF THE COSPLAY.LIGHTING SOURCE CODE LIBRARY COLLECTION.                 |
-| SOURCE:  https://github.com/cosplaylighting/binary                           |
-| LICENSE: https://github.com/cosplaylighting/binary/blob/master/LICENSE       |
+| PART OF THE CIRCUIT REWIND SOURCE CODE LIBRARY COLLECTION.                   |
+| SOURCE:  https://github.com/circuitrewind/binary                             |
+| LICENSE: https://github.com/circuitrewind/binary/blob/main/LICENSE           |
 +------------------------------------------------------------------------------+
 | SIMPLE STRUCTS/UNIONS FOR SWAPPING BETWEEN BIG AND LITTLE ENDIAN.            |
 | ALL SWAPPING IS DONE IN-PLACE, SO NO ADDITIONAL RAM IS NEEDED.               |
