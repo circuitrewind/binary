@@ -27,6 +27,15 @@
 
 
 
+#if defined(__clang__)
+#	pragma clang diagnostic push
+#	pragma clang diagnostic ignored "-Wgnu-anonymous-struct"
+#	pragma clang diagnostic ignored "-Wnested-anon-types"
+#endif
+
+
+
+
 ////////////////////////////////////////////////////////////////////////////////
 // BITFIELD - 8-BIT
 ////////////////////////////////////////////////////////////////////////////////
@@ -361,6 +370,13 @@ union PACKED uint32_b {
 
 	static INLINE uint32_b fill() { return 0xffffffffL; }
 };
+
+
+
+
+#if defined(__clang__)
+#	pragma clang diagnostic pop
+#endif
 
 
 
