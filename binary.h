@@ -105,8 +105,8 @@ union PACKED uint8_b {
 	}
 
 
-	static INLINE uint8_b clear()	{ return 0x00; }
-	static INLINE uint8_b fill()	{ return 0xff; }
+	static INLINE uint8_b clear()	{ return (uint8_t) 0x00; }
+	static INLINE uint8_b fill()	{ return (uint8_t) 0xff; }
 };
 
 
@@ -208,8 +208,20 @@ union PACKED uint16_b {
 	}
 
 
-	static INLINE uint16_b clear()	{ return 0x0000; }
-	static INLINE uint16_b fill()	{ return 0xffff; }
+	static INLINE uint16_b be(const void *bytes) {
+		const uint8_t* b = static_cast<const uint8_t*>(bytes);
+		return static_cast<uint16_t>(b[0] << 8 | b[1]);
+	}
+
+
+	static INLINE uint16_b le(const void *bytes) {
+		const uint8_t* b = static_cast<const uint8_t*>(bytes);
+		return static_cast<uint16_t>(b[1] << 8 | b[0]);
+	}
+
+
+	static INLINE uint16_b clear()	{ return (uint16_t) 0x0000; }
+	static INLINE uint16_b fill()	{ return (uint16_t) 0xffff; }
 };
 
 
@@ -370,8 +382,26 @@ union PACKED uint32_b {
 	}
 
 
-	static INLINE uint32_b clear()	{ return 0x00000000L; }
-	static INLINE uint32_b fill()	{ return 0xffffffffL; }
+	static INLINE uint32_b be(const void *bytes) {
+		const uint8_t* b = static_cast<const uint8_t*>(bytes);
+		return	(static_cast<uint32_t>(b[0]) << 24) |
+				(static_cast<uint32_t>(b[1]) << 16) |
+				(static_cast<uint32_t>(b[2]) <<  8) |
+				(static_cast<uint32_t>(b[3]));
+	}
+
+
+	static INLINE uint32_b le(const void *bytes) {
+		const uint8_t* b = static_cast<const uint8_t*>(bytes);
+		return	(static_cast<uint32_t>(b[3]) << 24) |
+				(static_cast<uint32_t>(b[2]) << 16) |
+				(static_cast<uint32_t>(b[1]) <<  8) |
+				(static_cast<uint32_t>(b[0]));
+	}
+
+
+	static INLINE uint32_b clear()	{ return (uint32_t) 0x00000000L; }
+	static INLINE uint32_b fill()	{ return (uint32_t) 0xffffffffL; }
 };
 
 
