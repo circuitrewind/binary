@@ -105,7 +105,8 @@ union PACKED uint8_b {
 	}
 
 
-	static INLINE uint8_b fill() { return 0xff; }
+	static INLINE uint8_b clear()	{ return 0x00; }
+	static INLINE uint8_b fill()	{ return 0xff; }
 };
 
 
@@ -207,7 +208,8 @@ union PACKED uint16_b {
 	}
 
 
-	static INLINE uint16_b fill() { return 0xffff; }
+	static INLINE uint16_b clear()	{ return 0x0000; }
+	static INLINE uint16_b fill()	{ return 0xffff; }
 };
 
 
@@ -368,7 +370,8 @@ union PACKED uint32_b {
 	}
 
 
-	static INLINE uint32_b fill() { return 0xffffffffL; }
+	static INLINE uint32_b clear()	{ return 0x00000000L; }
+	static INLINE uint32_b fill()	{ return 0xffffffffL; }
 };
 
 
